@@ -1,8 +1,8 @@
 #pragma once
-class AbstrBook
+class AbstrBook					//Абстрактный класс Книга
 {
 public:
-	virtual void printBook() = 0;
-	virtual void inputBook() = 0;
+	virtual void printBook() const = 0;	//Виртуальный метод вывода на экран книги
+	virtual void inputBook() = 0;	//Виртуальный метод ввода книги
 };
 

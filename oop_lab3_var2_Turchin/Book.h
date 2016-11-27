@@ -24,12 +24,13 @@ public:
 
 	virtual void printBook() const;										//Реализация метода вывода на экран из Абстрактного класса
 	
-	static void showArray();
-	static void clearArray();
-	static void delElem(int n);
+	static void showArray();											//Метод вывода на экран всего массива объектов
+	static void clearArray();											//Метод отчистки массива
+	static void delElem(int n);											//Метод удаления объекта из массива по индексу
+	static void showSysInfo();											//Метод вывода служебной информации
 
 private:
-	static void checkArray();											//Метод проверки на наличие свободных мест в массиве
+	static void checkArray();											//закрытый метод проверки на наличие свободных мест в массиве
 
 };
 

@@ -8,7 +8,7 @@ Book::Book() :Title("<empty>"+ std::to_string(objCount)), Author("<empty>"+ std:
 {
 	checkArray();						//проверяем размер массива под указатели на объекты
 	Array[objCount++] = this;			//вставляем указатель на только что созданный объект, в массив указателей
-	std::cout << "Конструктор для " << std::endl;
+	std::cout << "Конструктор для :" << std::endl;
 	this->printBook();
 }
 
@@ -57,35 +57,40 @@ void Book::printBook() const										//Статический метод вывода объекта на экра
 		<< (inLib ? "YES" : "NO") << std::endl;
 }
 
-void Book::showArray()
+void Book::showArray()												//Статический метод вывода массива объектов на экран
 {
 	std::cout << "ArraySize = " << arraySize << ";   objCount = " << objCount << std::endl;
-	if (objCount > 0)
+	if (objCount > 0)												//Если количество объектов больше 0
 	{
-		for (int i = 0; i < objCount; i++)
+		for (int i = 0; i < objCount; i++)							//пробегаем циклом по массиву
 		{
-			Array[i]->printBook();
+			Array[i]->printBook();									//вызываем метод вывода на экран каждому объекту
 		}
 	}
 	else
 	{
-		std::cout << "Array is empty..." << std::endl;
+		std::cout << "Array is empty..." << std::endl;				//иначе выводим сообщение что массив пуст
 	}
 }
 
-void Book::clearArray()
+void Book::clearArray()												//Очищаем массив
 {
-	while (objCount != 0)
-		delete (Book*)(Array[0]);
+	while (objCount != 0)											//
+		delete (Book*)(Array[0]);									//Удаляем нулевой элемент т.к.по алгоритму внутри деструктора сравнение идет с начала массива 
+}																	//т.о.ускаряем алгоритм удаления
+
+void Book::delElem(int n)											//Статический метод удаления по индексу
+{
+	if (n >= 0 && n < objCount)										//Если передаваемый индекс корректный
+		delete (Book*)(Array[n]);									//Вызываем деструктор класса Book, для этого указываем компилятору что указатели в массиве указывают на объект-наследник
 }
 
-void Book::delElem(int n)
+void Book::showSysInfo()
 {
-	if (n >= 0 && n < objCount)
-		delete (Book*)(Array[n]);
+	std::cout << "arraySize: " << arraySize << ";   objCount: " << objCount << std::endl;
 }
 
-void Book::checkArray()
+void Book::checkArray()						//Закрытый метод проверки на наличие свободных мест в массиве
 {
 	if (Array==NULL)						//если массив не был проинициализирован то создаем новый массив на 2 элемента
 	{
@@ -96,16 +101,16 @@ void Book::checkArray()
 	{
 		if (arraySize < (objCount + 1))		//если размер массива не позволяет дописать еще один объект (заполнен)
 		{
-			//создаем больший массив чем был ранее
+			//создаем больший массив чем текущий
 			AbstrBook ** newArray = new AbstrBook*[arraySize * 2];
-			//переписываем предыдущий массив в новый
+			//переписываем текущий массив в новый
 			for (int i = 0; i < arraySize; i++)
 			{
 				newArray[i] = Array[i];
 			}
-			delete[] Array;
-			Array = newArray;
-			arraySize *= 2;
+			delete[] Array;					//Освобождаем память из под текущего массива указателей
+			Array = newArray;				//Устанавливаем текущим только что созданный
+			arraySize *= 2;					//Приводим в соответствие размер массива
 		}
 	}
 }

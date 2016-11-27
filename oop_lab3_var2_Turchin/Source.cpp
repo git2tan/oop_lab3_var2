@@ -1,7 +1,10 @@
 #include "Book.h"
 
-void menu();
-
+void menu();		//Функция вывода меню
+enum MyEnum
+{
+	exit0,add,del,show,clear			//Заводим переменные для номеров пунктов меню
+};
 ///////////////////////////////////////////////////////////////////////////////////////
 
 void main()
@@ -14,35 +17,37 @@ void main()
 
 void menu()
 {
-	char c = 0;
+	int c=1;
 	int t;
-	while (c != '0')
+	while (c != exit0)
 	{
+		std::cout << std::setw(56) << std::setfill('+') <<"+"<< std::endl;
+		Book::showSysInfo();												//Вывод служебной информации
 		std::cout << "Меню:" << std::endl;
-		std::cout << "1. Добавить объект" << std::endl;
-		std::cout << "2. Удалить объект" << std::endl;
-		std::cout << "3. Вывести массив объектов на экран" << std::endl;
-		std::cout << "4. Очистить массив" << std::endl;
+		std::cout << add << ". Добавить объект" << std::endl;
+		std::cout << del << ". Удалить объект" << std::endl;
+		std::cout << show << ". Вывести массив объектов на экран" << std::endl;
+		std::cout << clear << ". Очистить массив" << std::endl;
 		std::cout << "0. Выход" << std::endl;
 		std::cin >> c;
 		switch (c)
 		{
-		case '1':
+		case (add):
 			new Book();
 			break;
-		case '2':
+		case (del):
 			std::cout << "Введите номер удаляемого: " << std::endl;
 			std::cin >> t;
 			Book::delElem(t);
 			break;
-		case '3':
+		case (show):
 			Book::showArray();
 			system("pause");
 			break;
-		case '4':
+		case (clear):
 			Book::clearArray();
 			break;
-		case '0':
+		case (exit0):
 			Book::clearArray();
 			break;
 		default:

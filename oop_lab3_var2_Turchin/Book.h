@@ -3,31 +3,33 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <Windows.h>
 
 class Book :
-	public AbstrBook
+	public AbstrBook													//Наследуем от абстрактного класса (от интерфейса?)
 {
-public:
-	Book();
-	Book(std::string, std::string, bool);
-
-	~Book();
-
-	void printBook() const;
-	void inputBook();
-	
-	Book &setBook(std::string Title, std::string Author, bool inLib);
-	Book &setInLib(bool inLib);
-	Book &setTitle(std::string);
-	Book &setAuthor(std::string);
-
-	const bool getInLib() const;
-	const std::string getTitle() const;
-	const std::string getAuthor() const;
-		
 private:
-	std::string Title;
-	std::string Author;
-	bool inLib;
+	std::string Title;													//Название книги
+	std::string Author;													//Автор
+	bool inLib;															//Наличие в библиотеке (да или нет)
+
+	static AbstrBook** Array;											//массив указателей на объекты родительского класса
+	static int objCount;												//количество проинициализированных объектов
+	static int arraySize;												//Размер массива для хранения указателей
+public:
+	Book();																//Конструктор по умолчанию
+	//Book(std::string, std::string, bool);								//Конструктор с параметрами
+
+	~Book();															//Деструктор
+
+	virtual void printBook() const;										//Реализация метода вывода на экран из Абстрактного класса
+	
+	static void showArray();
+	static void clearArray();
+	static void delElem(int n);
+
+private:
+	static void checkArray();											//Метод проверки на наличие свободных мест в массиве
+
 };
 

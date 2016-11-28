@@ -3,5 +3,6 @@ class AbstrBook					//Абстрактный класс Книга
 {
 public:
 	virtual void printBook() const = 0;	//Виртуальный метод вывода на экран книги
+	virtual void input() = 0;
 };
 

@@ -3,7 +3,7 @@
 void menu();		//Функция вывода меню
 enum MyEnum
 {
-	exit0,add,del,show,clear			//Заводим переменные для номеров пунктов меню
+	exit0, add, del, show, clear, input			//Заводим переменные для номеров пунктов меню
 };
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,14 +21,16 @@ void menu()
 	int t;
 	while (c != exit0)
 	{
-		std::cout << std::setw(56) << std::setfill('+') <<"+"<< std::endl;
+		std::cout << std::setw(56) << std::setfill('+') << "+" << std::setfill(' ') << std::endl;
 		Book::showSysInfo();												//Вывод служебной информации
 		std::cout << "Меню:" << std::endl;
 		std::cout << add << ". Добавить объект" << std::endl;
 		std::cout << del << ". Удалить объект" << std::endl;
 		std::cout << show << ". Вывести массив объектов на экран" << std::endl;
 		std::cout << clear << ". Очистить массив" << std::endl;
+		std::cout << input << ". Ввести новый объект" << std::endl;
 		std::cout << "0. Выход" << std::endl;
+		
 		std::cin >> c;
 		switch (c)
 		{
@@ -49,6 +51,9 @@ void menu()
 			break;
 		case (exit0):
 			Book::clearArray();
+			break;
+		case (input):
+			Book::createAndInputNewObj();
 			break;
 		default:
 			std::cout << "Fail" << std::endl;

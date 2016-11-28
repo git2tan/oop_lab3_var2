@@ -57,6 +57,52 @@ void Book::printBook() const										//Статический метод вывода объекта на экра
 		<< (inLib ? "YES" : "NO") << std::endl;
 }
 
+void Book::input()								//метод заменяет значения заданные по умолчанию на введенные с клавиатуры
+{
+	std::cout << "Please, input the new Title" << std::endl;
+	std::cout << ">>>";
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	std::string s1;
+	std::getline(std::cin, s1);
+	if (!s1.empty())
+		this->Title = s1;
+	else
+		this->Title = "<empty(default)>" + std::to_string(objCount);
+
+	std::cout << "Please, input the new Author" << std::endl;
+	std::cout << ">>>";
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	std::string s2;
+	std::getline(std::cin, s2);
+	if (!s2.empty())
+		this->Author = s2;
+	else
+		this->Author = "<no name>" + std::to_string(objCount);
+
+	std::cout << "Is book in the Library? Yes(1) or no(0)" << std::endl;
+	std::cout << ">>>";
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	int tmp;
+	std::cin >> tmp;
+	while (true)
+	{
+		if (tmp == 1)
+		{
+			inLib = true;
+			break;
+		}
+		if (tmp == 0)
+		{
+			inLib = false;
+			break;
+		}
+		std::cout << "Sorry, uncorect input. Try again! Is book in Library? Yes(1) or no(0)" << std::endl;
+		std::cout << ">>>";
+		std::cin.ignore(std::cin.rdbuf()->in_avail());
+		std::cin >> tmp;
+	}
+}
+
 void Book::showArray()												//Статический метод вывода массива объектов на экран
 {
 	std::cout << "ArraySize = " << arraySize << ";   objCount = " << objCount << std::endl;
@@ -88,6 +134,12 @@ void Book::delElem(int n)											//Статический метод удаления по индексу
 void Book::showSysInfo()
 {
 	std::cout << "arraySize: " << arraySize << ";   objCount: " << objCount << std::endl;
+}
+
+void Book::createAndInputNewObj()
+{
+	Book *newBook = new Book();
+	newBook->input();
 }
 
 void Book::checkArray()						//Закрытый метод проверки на наличие свободных мест в массиве

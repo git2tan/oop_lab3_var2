@@ -18,8 +18,6 @@ private:
 	static int arraySize;												//Размер массива для хранения указателей
 public:
 	Book();																//Конструктор по умолчанию
-	//Book(std::string, std::string, bool);								//Конструктор с параметрами
-
 	~Book();															//Деструктор
 
 	virtual void printBook() const;										//Реализация метода вывода на экран из Абстрактного класса

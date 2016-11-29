@@ -1,7 +1,7 @@
 #include "Book.h"
 
 void menu();		//Функция вывода меню
-enum MyEnum
+enum MyEnum			//перечислитель
 {
 	exit0, add, del, show, clear, input			//Заводим переменные для номеров пунктов меню
 };
@@ -44,7 +44,8 @@ void menu()
 			break;
 		case (show):
 			Book::showArray();
-			system("pause");
+			system(
+				"pause");
 			break;
 		case (clear):
 			Book::clearArray();

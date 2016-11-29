@@ -1,9 +1,8 @@
 #pragma once
-#include "AbstrBook.h"
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <Windows.h>
+#include "AbstrBook.h"		//Подключаем класс - родитель
+#include <iostream>			//подключаем библиотеку i/o  потоков
+#include <iomanip>			//Подключаем библиотеку для форматирования вывода
+#include <string>			//подключаем стандартный библиотечный класс для использования его в качестве полей класса
 
 class Book :
 	public AbstrBook													//Наследуем от абстрактного класса (от интерфейса?)
